@@ -1,0 +1,37 @@
+<div class="table" >
+  <table ng-class="tableClass">
+    <thead>
+      <tr>
+        <th ng-repeat="field in fields" ng-bind="field.header"></th>
+        <th ng-if="urlEdit" > </th>
+        <th ng-if="deleteFunction" > </th>
+      </tr>
+    </thead>
+    <tbody ng-if="items.length <= 0">
+      <td>A pesquisa não retornou nenhum resultado</td>
+    </tbody>
+    <tbody ng-if="items.length > 0">
+      <tr ng-repeat="item in items" >
+        <td ng-repeat="field in fields">
+          <table-constructor-column field="field" item="item" ></table-constructor-column>
+        </td>
+        <td class="action">
+          <button ng-class="buttonEditClass" ng-if="urlEdit" ng-click="showItem(item[fieldLoadEdit])">
+            <span ng-class="buttonEditContentClass" ng-bind="buttonEditContentText"></span>
+          </button>
+        </td>
+        <td class="action">
+          <button ng-class="buttonDeleteClass" ng-if="deleteFunction" ng-click="deleteItem(item)" >
+            <span ng-class="buttonDeleteContentClass" ng-bind="buttonDeleteContentText"></span>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <nav ng-if="enablePaginator">
+    <ul class="pager">
+      <li class="previous"><a href="" ng-click="previousPage()" >&larr; Previous</a></li>
+      <li class="next"><a href="" ng-click="nextPage()" >Next &rarr;</a></li>
+    </ul>
+  </nav>
+</div>
